@@ -49,7 +49,7 @@ furry-vr-headset/
 
 ## Quick start
 
-**Blank starting shell (nothing mounted):** [`cad/base_mask.scad`](cad/base_mask.scad) → [`stl/base_mask.stl`](stl/base_mask.stl) — hollow mask + neck opening only.
+**Blank starting shell (nothing mounted):** [`cad/base_mask.scad`](cad/base_mask.scad) → [`stl/base_mask.stl`](stl/base_mask.stl) — hollow **head-shaped** toon/anthro mask (skull, cheeks, blunt muzzle, neck opening). Previews in [`drawings/renders/cad_base_mask*.png`](drawings/renders/).
 
 1. Read [docs/bom.md](docs/bom.md) and order the OTS stack.  
 2. Read [docs/world-tracking.md](docs/world-tracking.md) — pose is in-shell, craft-agnostic.  

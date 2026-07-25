@@ -1,88 +1,100 @@
 // =============================================================================
-// Base hollow mask — blank only
-// Nothing mounted: no cameras, fans, bosses, ducts, or VR cutouts.
-// Use this as the starting shell for craft / further hard-surface work.
-// Units: mm
+// Blank hollow HEAD-shaped mask base
+// Toon/anthro head blank: round skull, cheeks, single blunt muzzle, neck hole.
+// No cameras/fans/bosses. Units: mm
+// +X right, +Y back, +Z up, snout -Y
 // =============================================================================
 
 $fn = 96;
 
-// Overall size (snout tip → occiput, temple width, crown height)
-mask_len = 280;
-mask_w   = 220;
-mask_h   = 240;
-wall     = 3.0;
+module head_outer() {
+    union() {
+        // Skull — slightly egg-shaped, not a perfect ball
+        translate([0, 25, 30])
+            scale([1.1, 1.05, 1.22])
+                sphere(r = 100);
 
-// Neck opening
-neck_w = 140;
-neck_d = 115;
-
-module outer_form() {
-    hull() {
-        // cranial bulb
-        translate([0, 35, 45])
-            scale([mask_w * 0.48, mask_len * 0.32, mask_h * 0.40])
-                sphere(r = 1);
-        // cheeks
-        for (s = [-1, 1])
-            translate([s * 72, 8, -5])
-                scale([0.95, 1.15, 1.05])
-                    sphere(r = 68);
-        // snout
-        translate([0, -mask_len/2 + 58, -18])
-            rotate([14, 0, 0])
-                scale([0.52, 1.05, 0.52])
-                    sphere(r = 72);
-        // chin / jaw
-        translate([0, -mask_len/2 + 85, -68])
-            scale([0.48, 0.72, 0.48])
-                sphere(r = 58);
-        // brow ridge mass (soft, no features)
-        translate([0, -10, 55])
-            scale([0.70, 0.45, 0.35])
+        // Occiput fullness
+        translate([0, 55, 25])
+            scale([0.95, 0.85, 1.0])
                 sphere(r = 70);
-    }
-}
 
-module inner_void() {
-    // Same silhouette, inset roughly by wall thickness
-    hull() {
-        translate([0, 35, 45])
-            scale([
-                mask_w * 0.48 - wall,
-                mask_len * 0.32 - wall,
-                mask_h * 0.40 - wall
-            ]) sphere(r = 1);
+        // Cheeks
         for (s = [-1, 1])
-            translate([s * 72, 8, -5])
-                scale([0.95, 1.15, 1.05])
-                    sphere(r = 68 - wall);
-        translate([0, -mask_len/2 + 58, -18])
-            rotate([14, 0, 0])
-                scale([0.52, 1.05, 0.52])
-                    sphere(r = 72 - wall);
-        translate([0, -mask_len/2 + 85, -68])
-            scale([0.48, 0.72, 0.48])
-                sphere(r = 58 - wall);
-        translate([0, -10, 55])
-            scale([0.70, 0.45, 0.35])
-                sphere(r = 70 - wall);
+            translate([s * 62, 5, 8])
+                scale([1.0, 1.1, 1.05])
+                    sphere(r = 52);
+
+        // Brow / forehead
+        translate([0, -12, 58])
+            scale([1.2, 0.6, 0.55])
+                sphere(r = 62);
+
+        // SINGLE blunt muzzle (keeps width forward so it reads as a snout, not a beak)
+        hull() {
+            // wide root into the face
+            translate([0, -32, 6])
+                scale([1.1, 0.5, 1.0])
+                    sphere(r = 62);
+            // thick mid-snout (do not taper early)
+            translate([0, -78, 2])
+                scale([0.95, 0.75, 0.75])
+                    sphere(r = 48);
+            translate([0, -108, -2])
+                scale([0.9, 0.7, 0.7])
+                    sphere(r = 40);
+            // blunt nose block
+            translate([0, -132, -6])
+                scale([0.85, 0.65, 0.6])
+                    sphere(r = 30);
+            // chin / lower muzzle
+            translate([0, -100, -32])
+                scale([0.9, 0.7, 0.55])
+                    sphere(r = 36);
+            // jaw rear
+            translate([0, -38, -36])
+                scale([1.05, 0.65, 0.55])
+                    sphere(r = 52);
+        }
+
+        // Throat / neck blend into skull
+        translate([0, 20, -45])
+            scale([1.1, 1.0, 0.8])
+                sphere(r = 58);
     }
 }
 
-module neck_cut() {
-    // Open bottom-rear for the neck — only opening in the blank
-    translate([0, mask_len/2 - 10, -mask_h/2 + 50])
-        rotate([65, 0, 0])
-            scale([neck_w/2, neck_d/2, 1])
-                cylinder(r = 1, h = 90, center = true);
+module head_cavity() {
+    union() {
+        translate([0, 22, 28])
+            scale([0.9, 0.9, 0.95])
+                sphere(r = 100);
+        translate([0, -30, 0])
+            scale([0.72, 1.2, 0.7])
+                sphere(r = 52);
+        translate([0, -75, -8])
+            scale([0.55, 1.05, 0.55])
+                sphere(r = 40);
+        translate([0, 15, -30])
+            scale([0.9, 0.9, 0.75])
+                sphere(r = 60);
+    }
+}
+
+module neck_opening() {
+    translate([0, 16, -105])
+        rotate([90, 0, 0])
+            scale([68, 1, 58])
+                cylinder(r = 1, h = 110, center = true);
+    translate([0, 14, -130])
+        cube([180, 170, 60], center = true);
 }
 
 module base_mask() {
     difference() {
-        outer_form();
-        inner_void();
-        neck_cut();
+        head_outer();
+        head_cavity();
+        neck_opening();
     }
 }
 
