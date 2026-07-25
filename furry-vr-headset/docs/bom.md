@@ -11,6 +11,17 @@ All dimensions in millimeters unless noted. Prefer the **primary** line; **alt**
 | 2 | M3×55 smooth rod | IPD guide rails | Hardware |
 | 1 | M3 threaded rod + opposing nuts / printed nut shoes | IPD adjuster | Hardware |
 
+## World tracking (primary — required for fur-covered shell)
+
+| Qty | Part | Key dims / notes | Source class |
+|-----|------|------------------|--------------|
+| 1 | Tundra Tracker / Vive Tracker 3.0 (or equiv.) | Mounts on printed mast plate; keep ≥40 mm clear of fur at tip | SteamVR ecosystem |
+| 2 | SteamVR Base Station 1.0 or 2.0 | Room outside-in reference | SteamVR |
+| 1 | Printed tracker mast | `tracker_mast.stl` — ear/horn/dorsal spike | Print |
+| 1 | *Alt:* magnetic tracker source + sensor | Tracks **through** fur/foam; watch metal distortion | Polhemus-class / OEM |
+
+> Do **not** buy LiDAR expecting it to see through fur. See [world-tracking.md](world-tracking.md).
+
 ## Cameras (Quest-class + face)
 
 | Qty | Part | Key dims / notes | Source class |

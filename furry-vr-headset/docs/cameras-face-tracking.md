@@ -1,14 +1,17 @@
 # Cameras & face tracking
 
-DIY stack reuses **Quest-class camera parts** (or the same sensor class) for world tracking, plus IR cameras for eye/face — the same roles Meta splits across Quest / Quest Pro accessories.
+DIY stack reuses **Quest-class camera parts** (or the same sensor class) as an *optional* optical layer, plus IR cameras for eye/face.
+
+**Room / headset 6DoF under fur is not solved by these cameras.** See [world-tracking.md](world-tracking.md): use a lighthouse tracker mast or magnetic tracking. LiDAR and inside-out cams fail under pile fur.
 
 ## Roles
 
 | Role | Count | Sensor class | Notes |
 |------|------:|--------------|-------|
-| World / SLAM / passthrough assist | 4 | Quest 2/3 tracking modules (OV7251-class global shutter) | Upper+lower L/R in outer shell |
-| Eye tracking | 2 | IR OV2640 / Quest Pro-class eye cams | On optical chassis, temporal of each lens |
-| Lower face / mouth | 1–2 | IR UVC or ESP-hosted | Below light seal (Project Babble style) |
+| World / room pose (primary) | 1 | Lighthouse/Tundra puck on mast *or* magnetic sensor | [world-tracking.md](world-tracking.md) |
+| World / SLAM / passthrough (optional) | 4 | Quest 2/3-class global shutter | Only with clear apertures — not under dense fur |
+| Eye tracking | 2 | IR OV2640 / Quest Pro-class eye cams | Inward; fur irrelevant |
+| Lower face / mouth | 1–2 | IR UVC or ESP-hosted | Inward; fur irrelevant |
 
 ## Mechanical pockets
 

@@ -65,8 +65,9 @@ flowchart TB
 1. Display only — OpenHMD / Monado / vendor distortion shader with pancake profiles.  
 2. IMU head pose — HadesVR / OpenVR driver style 3DoF.  
 3. IR face — Project Babble + EyeTrackVR → VRCFaceTracking / OSC.  
-4. World cameras — Basalt / OpenVSLAM / custom; replace 3DoF when stable.  
-5. Harvested Quest modules — after MIPI bridge hardware exists; mechanics already fit.
+4. **World pose** — SteamVR lighthouse tracker on mast (or magnetic); fuse with IMU.  
+5. Optional clear-aperture world cameras — Basalt / OpenVSLAM only if nose/mesh windows stay fur-free.  
+6. Harvested Quest modules — after MIPI bridge hardware exists; not the fur-product pose source.
 
 ## Why pancake modules inside a fursuit head
 

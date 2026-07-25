@@ -9,10 +9,11 @@ Blank, decorateable fursuit-head **shell** that contains a fully DIY VR optical 
 | Displays + optics | Dual **SeeYa 1.03" 2560×2560** Micro-OLED + matching **pancake** modules (OTS kit) |
 | IPD | Mechanical rails, **56–72 mm** |
 | Compute (v1) | **PC-tethered** via dual HDMI/DisplayPort → MIPI driver boards (standalone SoC later) |
-| World tracking cameras | **4× Quest 2/3-class** harvested modules *or* OTS OV7251/OV9282 global-shutter boards |
-| Eye / face tracking | **2× IR eye cams + 1–2× lower-face IR cams** (Quest Pro / EyeTrackVR / Project Babble class) |
+| **World / room pose** | **Outside-in** SteamVR/Tundra tracker on a clear **ear/horn mast** (alt: magnetic tracker through fur). Not under-fur LiDAR/cameras — see [docs/world-tracking.md](docs/world-tracking.md) |
+| World cameras (optional) | **4× Quest-class** modules for experiments / clear-aperture passthrough only |
+| Eye / face tracking | **2× IR eye cams + 1–2× lower-face IR cams** (inward; fur irrelevant) |
 | Cooling | Cheek + snout intake → face-wash plenum → electronics bay → dual **40 mm** cranial exhaust (+ optional 3010 battery blower) |
-| Outer shell | Species-agnostic blank with decoration bosses and hidden camera apertures |
+| Outer shell | Species-agnostic blank with decoration bosses and tracker mast mount |
 
 ```mermaid
 flowchart LR
@@ -20,14 +21,17 @@ flowchart LR
     Intake[CheekSnoutIntake]
     FaceWash[FaceWashPlenum]
     Optics[OpticalChassis]
-    Cams[QuestAndIRCameras]
+    FaceCams[InwardIRFaceEye]
+    Mast[TrackerMast_AboveFur]
     Elec[DriverBoardsBattery]
     Exhaust[CranialFans]
   end
+  BS[LighthouseBaseStations] -->|IR| Mast
   PC[HostPC] -->|HDMI_DP_USB| Elec
+  Mast --> PC
   Intake --> FaceWash --> Elec --> Exhaust
   FaceWash --> Optics
-  Cams -->|USB_MIPI| Elec
+  FaceCams -->|USB| Elec
   Optics -->|MIPI| Elec
 ```
 
