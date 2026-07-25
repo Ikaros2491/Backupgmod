@@ -10,6 +10,7 @@ parts=(
   "cooling_ducts.scad:cooling_ducts.stl"
   "face_interface.scad:face_interface.stl"
   "camera_mounts.scad:camera_mounts.stl"
+  "pose_sensor_bay.scad:pose_sensor_bay.stl"
   "tracker_mast.scad:tracker_mast.stl"
 )
 

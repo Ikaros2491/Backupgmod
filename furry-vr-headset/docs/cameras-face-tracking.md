@@ -2,14 +2,15 @@
 
 DIY stack reuses **Quest-class camera parts** (or the same sensor class) as an *optional* optical layer, plus IR cameras for eye/face.
 
-**Room / headset 6DoF under fur is not solved by these cameras.** See [world-tracking.md](world-tracking.md): use a lighthouse tracker mast or magnetic tracking. LiDAR and inside-out cams fail under pile fur.
+**Room / headset 6DoF is not solved by these cameras** when buyers cover the shell in craft. See [world-tracking.md](world-tracking.md): **in-shell magnetic + IMU** (optional UWB). LiDAR and inside-out cams fail under pile fur and fight the blank-shell product.
 
 ## Roles
 
 | Role | Count | Sensor class | Notes |
 |------|------:|--------------|-------|
-| World / room pose (primary) | 1 | Lighthouse/Tundra puck on mast *or* magnetic sensor | [world-tracking.md](world-tracking.md) |
-| World / SLAM / passthrough (optional) | 4 | Quest 2/3-class global shutter | Only with clear apertures — not under dense fur |
+| World / room pose (primary) | 1 | In-shell magnetic sensor + IMU | Occiput bay; craft-agnostic |
+| World / room pose (companion) | 0–1 | In-shell UWB tag | Optional |
+| World / SLAM / passthrough (optional) | 4 | Quest 2/3-class global shutter | Experiments only — not required for product pose |
 | Eye tracking | 2 | IR OV2640 / Quest Pro-class eye cams | Inward; fur irrelevant |
 | Lower face / mouth | 1–2 | IR UVC or ESP-hosted | Inward; fur irrelevant |
 

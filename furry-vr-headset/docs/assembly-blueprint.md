@@ -56,19 +56,26 @@ flowchart BT
 4. Optional: 3010 blower over battery bay, exhausting to occiput slot.  
 5. Verify continuous path: cheek/snout → face → bay → fans (hold tissue at exhaust).
 
-### D. Cameras
+### D. In-shell pose bay (required for room tracking)
 
-1. World cams: drop harvested Quest modules into upper/lower L/R cradles; route flexes through channels into the bay.  
-2. If using OTS 24×24 boards, print `ots_gs_camera_adapter` and seat adapters in the same shell pockets.  
-3. Aim: upper pair slight down (~15°), lower pair nearer horizontal; yaw ~35° outward.  
-4. Face cams: eyes look at each eyeball; mouth cam looks at lips/jaw from below the light seal.
+1. Seat magnetic sensor in the occiput `pose_sensor_bay` cradle; cable toward electronics bay.  
+2. Optional: seat UWB module in the sibling cradle (keep plastic clear of chip antenna notch).  
+3. Screw tray to shell pose-bay flanges (M3).  
+4. Affix the printed keep-out ring / sticker on the **inside** craft brief: no large steel in Ø90 mm around bay.  
+5. Calibrate magnetic + IMU on host after first power-on.
 
-### E. Shell close
+### E. Cameras (face required; world optional)
+
+1. Face cams: eyes look at each eyeball; mouth cam looks at lips/jaw from below the light seal.  
+2. World cams are **optional experiments** only — product pose does not depend on them under craft.  
+3. If fitted: harvested Quest modules or OTS adapters in L/R cradles; aim upper pair ~15° down.
+
+### F. Shell close
 
 1. Slide optical + duct assembly into the VR bay pocket until face plate sits at design eye relief.  
 2. Secure chassis to shell bosses (M3).  
 3. Fit neck pad; route tether (if any) and kill-switch wiring out the neck opening.  
-4. Hand shell to decorator — only bosses and marked glue zones are attachment-safe.
+4. Hand shell to decorator — exterior is freeform craft; only remind them of the occiput ferrous keep-out.
 
 ## Critical alignments
 

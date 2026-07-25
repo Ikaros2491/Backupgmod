@@ -11,16 +11,18 @@ All dimensions in millimeters unless noted. Prefer the **primary** line; **alt**
 | 2 | M3×55 smooth rod | IPD guide rails | Hardware |
 | 1 | M3 threaded rod + opposing nuts / printed nut shoes | IPD adjuster | Hardware |
 
-## World tracking (primary — required for fur-covered shell)
+## World tracking (in-shell — craft / fur agnostic)
 
 | Qty | Part | Key dims / notes | Source class |
 |-----|------|------------------|--------------|
-| 1 | Tundra Tracker / Vive Tracker 3.0 (or equiv.) | Mounts on printed mast plate; keep ≥40 mm clear of fur at tip | SteamVR ecosystem |
-| 2 | SteamVR Base Station 1.0 or 2.0 | Room outside-in reference | SteamVR |
-| 1 | Printed tracker mast | `tracker_mast.stl` — ear/horn/dorsal spike | Print |
-| 1 | *Alt:* magnetic tracker source + sensor | Tracks **through** fur/foam; watch metal distortion | Polhemus-class / OEM |
+| 1 | Magnetic tracker **sensor** capsule/PCB | Envelope ~**22×14×10**; seats in occiput `pose_sensor_bay` | Polhemus-class / OEM EM kit |
+| 1 | Magnetic tracker **source** (room) | Desk/wall/ceiling mount in play space | Same EM kit |
+| 1 | Printed pose bay tray + keep-out ring | `pose_sensor_bay.stl` — fully inside shell | Print |
+| 1 | BNO085 / ICM-42688 IMU | Fused with magnetic pose | Adafruit / SparkFun |
+| 1 | *Optional:* UWB tag module (DWM3000-class) | ~**28×22×5** cradle in same bay | Qorvo / Pozyx-class |
+| 3–4 | *Optional:* UWB room anchors | Only if using UWB companion | Same ecosystem |
 
-> Do **not** buy LiDAR expecting it to see through fur. See [world-tracking.md](world-tracking.md).
+> Product pose is **magnetic + IMU inside the shell**. LiDAR / under-fur cameras are not the pose source. Optional `tracker_mast.stl` is advanced/opt-in only. See [world-tracking.md](world-tracking.md).
 
 ## Cameras (Quest-class + face)
 

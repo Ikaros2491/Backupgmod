@@ -3,9 +3,10 @@
 ## Goals
 
 1. Fully **DIY** VR image path (not a Quest stuffed in a mask).
-2. Reuse **Quest-class cameras** for world tracking and face/eye pipelines where possible.
-3. Ship a **blank shell** others can fur/foam without touching the VR bay.
-4. Build **active cooling into the head**, not clip-on fans after the fact.
+2. Ship a **blank shell** — buyers do arbitrary arts/crafts on the outside.
+3. **In-shell** room pose (magnetic + IMU) so decoration cannot break tracking.
+4. Inward face/eye cams; Quest-class world cams optional only.
+5. **Active cooling into the head**, not clip-on fans after the fact.
 
 ## Coordinate system
 
@@ -65,9 +66,9 @@ flowchart TB
 1. Display only — OpenHMD / Monado / vendor distortion shader with pancake profiles.  
 2. IMU head pose — HadesVR / OpenVR driver style 3DoF.  
 3. IR face — Project Babble + EyeTrackVR → VRCFaceTracking / OSC.  
-4. **World pose** — SteamVR lighthouse tracker on mast (or magnetic); fuse with IMU.  
-5. Optional clear-aperture world cameras — Basalt / OpenVSLAM only if nose/mesh windows stay fur-free.  
-6. Harvested Quest modules — after MIPI bridge hardware exists; not the fur-product pose source.
+4. **World pose** — in-shell magnetic sensor (occiput bay) + IMU; optional UWB. Craft layer unconstrained.  
+5. Optional world cameras — research/passthrough only; not required for product pose.  
+6. Harvested Quest modules — after MIPI bridge exists; never the blank-shell pose source.
 
 ## Why pancake modules inside a fursuit head
 

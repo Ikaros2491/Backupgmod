@@ -1,6 +1,6 @@
 # Fursuit-Integrated DIY VR Headset
 
-Blank, decorateable fursuit-head **shell** that contains a fully DIY VR optical stack, Quest-class tracking/face cameras, and **active ducted cooling**. Prospective buyers/makers fur, foam, and style the outer shell however they want; the inner bay is a fixed VR + thermal chassis.
+Blank, decorateable fursuit-head **shell** — you ship the rigid VR + thermal + pose chassis; buyers foam, fur, and craft the outside into whatever character they want.
 
 ## Prototype architecture (locked)
 
@@ -8,27 +8,28 @@ Blank, decorateable fursuit-head **shell** that contains a fully DIY VR optical 
 |-----------|--------|
 | Displays + optics | Dual **SeeYa 1.03" 2560×2560** Micro-OLED + matching **pancake** modules (OTS kit) |
 | IPD | Mechanical rails, **56–72 mm** |
-| Compute (v1) | **PC-tethered** via dual HDMI/DisplayPort → MIPI driver boards (standalone SoC later) |
-| **World / room pose** | **Outside-in** SteamVR/Tundra tracker on a clear **ear/horn mast** (alt: magnetic tracker through fur). Not under-fur LiDAR/cameras — see [docs/world-tracking.md](docs/world-tracking.md) |
-| World cameras (optional) | **4× Quest-class** modules for experiments / clear-aperture passthrough only |
-| Eye / face tracking | **2× IR eye cams + 1–2× lower-face IR cams** (inward; fur irrelevant) |
-| Cooling | Cheek + snout intake → face-wash plenum → electronics bay → dual **40 mm** cranial exhaust (+ optional 3010 battery blower) |
-| Outer shell | Species-agnostic blank with decoration bosses and tracker mast mount |
+| Compute (v1) | **PC-tethered** via dual HDMI/DisplayPort → MIPI driver boards |
+| **World / room pose** | **In-shell magnetic sensor** (occiput bay) + **IMU** — works under fur/foam/craft. Optional in-shell UWB companion. See [docs/world-tracking.md](docs/world-tracking.md) |
+| World cameras | Optional only; **not** product pose under decoration |
+| Eye / face tracking | **Inward** IR eye + mouth cams (outside craft irrelevant) |
+| Cooling | Cheek + snout intake → face-wash plenum → electronics bay → dual **40 mm** cranial exhaust |
+| Outer shell | Species-agnostic blank + decoration bosses; **no required exterior tracker windows** |
 
 ```mermaid
 flowchart LR
-  subgraph shell [FursuitShell]
+  subgraph shell [BlankShell]
     Intake[CheekSnoutIntake]
     FaceWash[FaceWashPlenum]
     Optics[OpticalChassis]
     FaceCams[InwardIRFaceEye]
-    Mast[TrackerMast_AboveFur]
+    PoseBay[MagneticPlusIMU]
     Elec[DriverBoardsBattery]
     Exhaust[CranialFans]
   end
-  BS[LighthouseBaseStations] -->|IR| Mast
+  Craft[BuyerCraftLayer] -.-> shell
+  MagSrc[RoomMagneticSource] -->|through_craft| PoseBay
   PC[HostPC] -->|HDMI_DP_USB| Elec
-  Mast --> PC
+  PoseBay --> PC
   Intake --> FaceWash --> Elec --> Exhaust
   FaceWash --> Optics
   FaceCams -->|USB| Elec
@@ -40,7 +41,7 @@ flowchart LR
 ```
 furry-vr-headset/
   README.md
-  docs/           # BOM, blueprints, cooling, cameras, dimensions
+  docs/           # BOM, blueprints, cooling, tracking, cameras, dimensions
   cad/            # Parametric OpenSCAD sources
   stl/            # Exported meshes for printing
   drawings/       # Orthographic blueprint sheets
@@ -48,29 +49,21 @@ furry-vr-headset/
 
 ## Quick start
 
-1. Read [docs/bom.md](docs/bom.md) and order the OTS stack.
-2. Skim [docs/assembly-blueprint.md](docs/assembly-blueprint.md) for stack-up order.
-3. Open `cad/assembly.scad` in [OpenSCAD](https://openscad.org/) to preview.
-4. Export printable parts:
-
-```bash
-cd furry-vr-headset/cad
-chmod +x export_all.sh
-./export_all.sh
-```
-
-5. Print shell in large segments (or split), PETG/ABS for ducting near fans; optical carriers in PETG.
+1. Read [docs/bom.md](docs/bom.md) and order the OTS stack.  
+2. Read [docs/world-tracking.md](docs/world-tracking.md) — pose is in-shell, craft-agnostic.  
+3. Skim [docs/assembly-blueprint.md](docs/assembly-blueprint.md).  
+4. Preview `cad/assembly.scad` in OpenSCAD; export with `cad/export_all.sh`.
 
 ## Design intent
 
-- **Contained headset** — wearer sees only lenses; batteries, boards, fans, and cameras live inside the head.
-- **Blank shell** — decoration bosses + smooth outer hull; fur/foam/ears are out of scope of the rigid kit.
-- **Thermal first** — fursuit heads trap heat; airflow is a first-class subsystem, not an afterthought.
-- **Headset-parts reuse** — camera pockets sized for harvested Quest tracking modules, with adapters for OTS global-shutter boards.
+- **You build the shell** — optics, cooling, inward face cams, in-shell pose bay.  
+- **They decorate** — fur/foam/paint/ears with almost no tracking constraints.  
+- **No LiDAR / no under-fur cameras for room pose** — those need clear apertures and fight the craft layer.  
+- **Magnetic (+ optional UWB) through craft** — the pose path that stays inside the product.
 
 ## Safety notes
 
-- Use a **hard kill switch** on battery power.
-- Keep LiPo packs in a protected bay with the optional blower; never crush cells with foam.
-- IR LEDs must be **850 nm**, current-limited; avoid 940 nm-only emitters if your cameras need 850 nm.
-- This is a prototype engineering package, not a certified wearable product.
+- Hard kill switch on battery power.  
+- Protected LiPo bay; optional 3010 blower.  
+- IR LEDs **850 nm**, current-limited.  
+- Prototype engineering package, not a certified wearable.

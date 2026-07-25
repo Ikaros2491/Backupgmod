@@ -41,6 +41,16 @@ Source of truth: [`cad/params.scad`](../cad/params.scad). Update parameters ther
 | Exhaust slot | 60 × 22 | `exhaust_slot_*` |
 | Optional blower | 30 × 30 × 10 | `blower_3010_*` |
 
+## In-shell pose bay
+
+| Dim | mm | Param |
+|-----|---:|-------|
+| Bay W×D×H | 55 × 28 × 40 | `pose_bay_*` |
+| Bay center Y / Z | 75 / 5 | `pose_bay_y/z` |
+| Mag sensor envelope | 22 × 14 × 10 | `mag_sensor_*` |
+| UWB module envelope | 28 × 22 × 5 | `uwb_module_*` |
+| Decorator ferrous keep-out R | 45 | `pose_keepout_r` |
+
 ## Cameras
 
 | Dim | mm | Param |

@@ -96,6 +96,21 @@ eye_cam_offset_y = -8;       // slightly below pupil line
 mouth_cam_y = -45;           // below optical chassis
 mouth_cam_z = 25;            // forward of face plane
 
+// --- In-shell pose bay (magnetic + optional UWB; fur/craft agnostic) ---
+// Occiput location: behind electronics, away from steel fan frames.
+pose_bay_w = 55;
+pose_bay_h = 40;
+pose_bay_d = 28;
+pose_bay_y = 75;             // toward occiput (+Y)
+pose_bay_z = 5;
+mag_sensor_w = 22;           // typical EM sensor capsule / PCB envelope
+mag_sensor_h = 14;
+mag_sensor_d = 10;
+uwb_module_w = 28;           // DWM3000-class module footprint
+uwb_module_h = 22;
+uwb_module_d = 5;
+pose_keepout_r = 45;         // decorator ferrous keep-out radius around bay center
+
 // --- Fasteners ---
 m3_clear = 3.3;
 m3_tap = 2.5;

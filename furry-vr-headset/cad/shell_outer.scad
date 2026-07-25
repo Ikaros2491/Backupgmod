@@ -111,6 +111,7 @@ module fan_mount_bosses() {
 
 module decoration_boss_field() {
     // Glue / screw pads so makers can attach foam, fur, ears, horns, etc.
+    // Exterior is unconstrained for craft — pose tracking is fully in-shell.
     positions = [
         [0, -shell_len/2 + 50, 30],          // snout bridge
         [-90, 0, 40], [90, 0, 40],           // cheeks
@@ -123,6 +124,21 @@ module decoration_boss_field() {
         translate(p) decoration_boss();
 }
 
+module pose_bay_mount() {
+    // Internal registration for pose_sensor_bay tray (occiput, under craft layer)
+    translate([0, pose_bay_y, pose_bay_z]) {
+        difference() {
+            // shallow shelf bosses
+            for (x = [-pose_bay_w/2 - 4, pose_bay_w/2 + 4])
+                translate([x, 0, -pose_bay_h/2 + 3])
+                    cube([14, 16, 8], center = true);
+            for (x = [-pose_bay_w/2 - 4, pose_bay_w/2 + 4])
+                translate([x, 0, -pose_bay_h/2 + 3])
+                    m3_hole(20);
+        }
+    }
+}
+
 module shell_outer(cutaway = false) {
     difference() {
         shell_envelope();
@@ -132,7 +148,10 @@ module shell_outer(cutaway = false) {
         // VR bay registration pocket (mates with optical chassis)
         translate([0, -5, 5])
             cube([chassis_w + 1, chassis_h + 1, chassis_d + 1], center = true);
-        // world cameras
+        // In-shell pose bay pocket (magnetic + optional UWB) — no exterior hole
+        translate([0, pose_bay_y, pose_bay_z])
+            cube([pose_bay_w + 1, pose_bay_d + 1, pose_bay_h + 1], center = true);
+        // Optional world cameras (experiments only — not product pose under fur)
         for (s = [-1, 1], e = [-1, 1])
             world_camera_pocket(s, e);
         if (cutaway)
@@ -141,6 +160,7 @@ module shell_outer(cutaway = false) {
     }
     fan_mount_bosses();
     decoration_boss_field();
+    pose_bay_mount();
 }
 
 shell_outer();
