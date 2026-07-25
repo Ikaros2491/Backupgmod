@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="VR Prototype — WebXR immersive playground with grab and teleport"
+    />
+    <title>VR Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="xr-canvas"></canvas>
+      <div id="hud" aria-live="polite">
+        <header class="brand">
+          <p class="brand-mark">VR Prototype</p>
+          <h1>Step into the sandbox</h1>
+          <p class="lede">
+            A WebXR playground for testing locomotion, grab, and spatial interaction.
+          </p>
+        </header>
+        <div class="actions">
+          <button id="enter-vr" type="button" disabled>Checking VR…</button>
+          <button id="enter-ar" type="button" disabled>Checking AR…</button>
+        </div>
+        <p id="status" class="status">Initializing WebXR…</p>
+        <ul class="hints">
+          <li>Trigger — grab highlighted objects</li>
+          <li>Thumbstick / touchpad — teleport</li>
+          <li>Desktop — click &amp; drag to look, WASD to move</li>
+        </ul>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
