@@ -5,6 +5,7 @@ STL_DIR="$(cd "$ROOT/../stl" && pwd)"
 mkdir -p "$STL_DIR"
 
 parts=(
+  "base_mask.scad:base_mask.stl"
   "optical_chassis.scad:optical_chassis.stl"
   "shell_outer.scad:shell_outer.stl"
   "cooling_ducts.scad:cooling_ducts.stl"

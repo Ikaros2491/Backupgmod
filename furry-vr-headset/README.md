@@ -49,6 +49,8 @@ furry-vr-headset/
 
 ## Quick start
 
+**Blank starting shell (nothing mounted):** [`cad/base_mask.scad`](cad/base_mask.scad) → [`stl/base_mask.stl`](stl/base_mask.stl) — hollow mask + neck opening only.
+
 1. Read [docs/bom.md](docs/bom.md) and order the OTS stack.  
 2. Read [docs/world-tracking.md](docs/world-tracking.md) — pose is in-shell, craft-agnostic.  
 3. Skim [docs/assembly-blueprint.md](docs/assembly-blueprint.md).  
