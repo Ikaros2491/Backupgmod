@@ -1,0 +1,51 @@
+name: Build Windows EXE
+
+on:
+  push:
+    paths:
+      - "phone-stress-test/**"
+      - ".github/workflows/build-phone-stress-exe.yml"
+  workflow_dispatch:
+
+jobs:
+  build-windows-exe:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: phone-stress-test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build EXE
+        run: pyinstaller --noconfirm PhoneLineStressTest.spec
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhoneLineStressTest-windows
+          path: phone-stress-test/dist/PhoneLineStressTest.exe
+
+      - name: Commit EXE into repo (dist folder)
+        if: github.ref == 'refs/heads/cursor/phone-line-stress-test-16b6' || startsWith(github.ref, 'refs/heads/cursor/')
+        shell: bash
+        run: |
+          mkdir -p phone-stress-test/dist
+          cd "${GITHUB_WORKSPACE}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Keep binary out of automatic commit unless explicitly needed —
+          # artifact upload above is the primary delivery path.
+          ls -la phone-stress-test/dist/
